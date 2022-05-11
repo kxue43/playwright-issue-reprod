@@ -67,6 +67,11 @@ def handle_one_mh_popup(popup: Page, cur: Cursor) -> None:
 
 
 def go_to_mental_health_table_view(page: Page, calendar_year: str) -> None:
+    print('before navigating to target view of website')
+    print('userAgent:', page.evaluate('() => window.navigator.userAgent'))
+    print('window.is_nav:', page.evaluate('() => window.is_nav'))
+    print('window.is_nav5up:', page.evaluate('() => window.is_nav5up'))
+    print('window.is_ie:', page.evaluate('() => window.is_ie'))
     active_count_xpath = 'xpath=//html/body/table/tbody/tr[4]/td[1]/table/tbody/tr[1]/td/table/tbody/tr[4]/td/a'
     section_xpath = 'xpath=//html/body/table/tbody/tr[4]/td[1]/table/tbody/tr[1]/td/table[3]/tbody/tr[6]/td/a'
     try:
@@ -156,6 +161,11 @@ class QcorTableScraper:
 
     def scrape_table(self) -> None:
         go_to_mental_health_table_view(self.page, self.calendar_year)
+        print('after navigating to target view of website')
+        print('userAgent:', self.page.evaluate('() => window.navigator.userAgent'))
+        print('window.is_nav:', self.page.evaluate('() => window.is_nav'))
+        print('window.is_nav5up:', self.page.evaluate('() => window.is_nav5up'))
+        print('window.is_ie:', self.page.evaluate('() => window.is_ie'))
         l1_loc = self.page.locator('xpath=//html/body/div[2]/table[2]/tbody/tr[@class="tblAlt"]')
         self.l1_tr_count = cast(int, l1_loc.count())
         for i in range(self.l1_tr_count):
