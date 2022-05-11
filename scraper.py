@@ -134,25 +134,12 @@ class QcorTableScraper:
         return self.current_l1_order + self.current_l2_order + self.current_l3_order
 
     def handle_one_popup(self, l3_tr_a_selector: str) -> None:
-        count = 1
-        while count <= 5:
-            try:
-                with self.page.expect_popup() as popup_info:
-                    self.page.click(l3_tr_a_selector)
-                popup = popup_info.value
-                popup.wait_for_load_state()
-            except TimeoutError:
-                print('stuck!')
-                print(l3_tr_a_selector)
-                try:
-                    self.page.reload(wait_until='networkidle')
-                except TimeoutError:
-                    self.page.wait_for_load_state('networkidle')
-                count += 1
-            else:
-                handle_one_mh_popup(popup, self.cur)
-                popup.close()
-                return
+        with self.page.expect_popup() as popup_info:
+            self.page.click(l3_tr_a_selector)
+        popup = popup_info.value
+        popup.wait_for_load_state()
+        handle_one_mh_popup(popup, self.cur)
+        popup.close()
 
     def scrape_table(self) -> None:
         go_to_mental_health_table_view(self.page, self.calendar_year)
