@@ -4,6 +4,10 @@ This is the reproduction repo to report a potential issue about handling popups 
 Playwright v1.21.0. The program automates the collection of public data from a government website. It is
 part of a larger project that I'm working on for my employer. I've obtained permission to publish this repo.
 
+## Update
+
+**It has been verified that it is not a bug of Playwright, but due to the bot protection mechanism of the target website.**
+
 ## Environments
 
 - OS: Windows 10 64-bit
